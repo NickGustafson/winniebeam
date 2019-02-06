@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Winnie Diary Archive [ABOUT]</title>		
+		<link href="https://fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet" />
+		<style>
+			body { font-family: 'Old Standard TT', serif;height:100%;width:100%;margin:0;padding:0;background-color:#000000;font-size:14pt; }
+			#bodyContent { height:auto;width:1024px;margin:0 auto;padding:20px;background-color:#F4D9B0; }
+
+			header, footer, nav, main { margin:0; }
+			header, footer { display:block;position:relative;width:100%; }
+			nav, main { display:inline-block;height:auto;vertical-align:top;padding:10px; }
+
+			header 
+			{ 
+				background-image:url('images/diary_bkgrd.png');
+				background-repeat:no-repeat;
+				background-size:cover;
+				background-position:center 80%;
+				
+				text-shadow: 3px 3px 3px #F2D5A4;
+				box-shadow:2px 2px 2px #000000; 
+			}
+			footer { border-top:double 5px #000000;font-size:smaller; }
+			nav { width:15%;padding-top:30px; }
+			main { width:calc(85% - 45px);text-align:justify; }
+
+			header h1 { margin:0 10px;padding-top:20px }
+			header h1 span { font-size:2em; }
+			header h2 { margin:-10px 10px 0 10px;font-size:1em;padding-bottom:20px; }
+			sup { font-size:smaller; }
+			
+			form { position:absolute;top:calc(50% - 0.75em);right:2%;text-align:right; }
+			form input { width:250px;font-family: 'Old Standard TT', serif;font-size:0.9em; }
+			form input, form button { border:none;background-color:transparent; }
+			.search-wrapper { background-color:#F8E7CB;height:1.2em;width:auto;border-radius:5px;box-shadow:3px 3px 3px #493A25;padding:2px; }
+
+			nav a { display:block;width:100%;height:auto;font-size:1.8em;color:#000000;text-decoration:none;vertical-align:middle;margin:10px 0;padding:2px; }			
+
+			p.first::first-letter { font-size:5em;float:left; }
+			
+			a:hover { text-decoration:underline;color:#ff0000; }
+			a.current { color:#F4D9B0;background-color:#735c3a;box-shadow:2px 2px 2px #000000;font-weight:bold; }
+			a.current:hover { text-decoration:none; }
+
+			.navlink { position:relative; }
+			aside { display:none; }
+			aside::before
+			{
+				content:' ';
+				background-color:#735c3a;
+				height:20px;width:20px;		
+				position:absolute;
+				left:-4%;
+				top:calc(50% - 10px);
+
+				transform:rotate(-45deg);
+			}
+			a:hover + aside 
+			{ 
+				position:absolute;
+				top:0;left:120%;
+				display:block; 
+				background-color:#735c3a;	
+				height:50px;width:200px;
+				padding:10px 10px 10px 30px;
+				margin:0;
+				border-radius:5%;
+				font-size:0.75em;
+				color:#efc98b;
+				box-shadow:3px 3px 3px #000000; 
+				opacity:0.9;
+			}
+			a.current:hover + aside { display:none; }
+		</style>
+		<!--[if lt IE 9]>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div id="bodyContent">
+			<header>
+				<!--background src: https://stcatharinesmuseumblog.files.wordpress.com/2016/07/6716-n.jpg -->
+				<h1>The Diary of<br /><span>Winnie Beam</span></h1>
+				<h2>An Archive of Early 20<sup>th</sup> Century St. Catharines</h2>
+
+				<form>
+					<div class="search-wrapper"><input type="search" placeholder="Search Archive" /><button type="button">&#128269;</button></div>
+				</form>
+			</header>
+			<nav>
+				<div class="navlink"><a href="#" class="current">About</a><aside>Introduction and project information</aside></div>
+				<div class="navlink"><a href="#">Biography</a><aside>Background Information about the life of <strong>Winnie Beam</strong></aside></div>
+				<div class="navlink"><a href="#">Timeline</a><aside>Chronology of events from the <strong>Winnie Beam</strong> diary</aside></div>
+				<div class="navlink"><a href="#">Map</a><aside>Interactive map of locations from the <strong>Winnie Beam</strong> diary</aside></div>
+				<div class="navlink"><a href="#">People</a><aside>Biographical information of persons mentioned in the <strong>Winnie Beam</strong> diary</aside></div>
+				<div class="navlink"><a href="#">Artefacts</a><aside>Scans of original diary pages, photos and other material</aside></div>
+				<div class="navlink"><a href="#">Resources</a><aside>Additional information and related topics</aside></div>
+				<div class="navlink"><a href="#">Credits</a><aside>Project team and sources</aside></div>
+			</nav>
+			<main>
+				<p class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae nunc pretium ante fringilla tristique ut eu arcu. Morbi nec nisl arcu. Maecenas vel imperdiet massa, eget placerat velit. Ut varius fringilla eros. Praesent consequat eros eget viverra congue. Cras hendrerit ipsum ipsum. Praesent condimentum euismod nibh, sed elementum est cursus ut. Suspendisse potenti. Praesent dictum sodales nisl vitae tempus. Donec ultricies interdum ligula, et fermentum nisl rutrum vehicula. Vestibulum suscipit porttitor tellus ac convallis.</p>
+
+				<p>Mauris a nisl vel eros fermentum facilisis. In eu lacus eu nisl interdum euismod. Sed et dui ligula. Proin consequat consequat nisl, at euismod massa tristique eget. Vestibulum consequat, purus quis aliquet ultricies, risus tortor ullamcorper massa, in dignissim quam mauris consequat lacus. Praesent placerat nulla in diam suscipit tincidunt. Ut sit amet augue et felis porttitor interdum. Quisque in quam lorem. Etiam vulputate rhoncus arcu. Sed tempor erat ac odio tincidunt, eget placerat mi venenatis. Mauris quis bibendum lectus, id tempor felis. Cras at auctor dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+				<p>Aliquam finibus sit amet neque nec mollis. Nunc tincidunt orci imperdiet sodales sollicitudin. Praesent interdum lobortis vestibulum. Aenean dictum imperdiet varius. Ut luctus fermentum ante, convallis auctor lacus molestie vel. Suspendisse consequat lacus porttitor purus fermentum, et tempor libero fringilla. Donec malesuada eu ligula vitae faucibus. Maecenas in enim congue, laoreet purus faucibus, facilisis mauris. Ut dignissim leo non scelerisque tincidunt.</p>
+
+				<p>Maecenas auctor lorem justo, ut tristique mauris facilisis posuere. Phasellus et quam magna. Etiam auctor velit et risus ultricies congue. Morbi dignissim tempor tincidunt. Etiam non turpis ac massa dictum tempus vitae ut lacus. Duis molestie tempus felis, non feugiat mi eleifend non. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque quis neque fringilla leo interdum convallis eget eget velit.</p>
+			</main>
+			<footer>
+				Page created by Nick Gustafson.
+			</footer>
+		</div>
+	</body>
+</html>
