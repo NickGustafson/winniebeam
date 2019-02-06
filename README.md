@@ -1,9 +1,10 @@
 # winniebeam
-Demo for archive site
+<h1>Archive site</h1>
 
-I wanted to use a limited colour scheme for this site and based it off of the yellowed pages of the diary.
-The font is based on late-19th/early 20th century typography
+<p>My proposed site would utilize a limited colour palette of mostly yellows and browns, based upon the aged pages of the diary itself, with black for normal text and red for hyperlinks.  To add to the period look, I would employ the Google Web Font called
+"Old Standard True Type", which is described as being based upon late 19th/early 20th century typography.</p>
 
+<p>The site would be divided into the following distinct navigable sections:</p>
 <dl>
   <dt>About</dt><dd>Introduction and project information</dd>
   <dt>Biography</dt><dd>Background Information about the life of Winnie Beam</dd>
@@ -14,3 +15,5 @@ The font is based on late-19th/early 20th century typography
   <dt>Resources</dt><dd>Additional information and related topics</dd>
   <dt>Credits</dt><dd>Project team and sources</dd>
 </dl>
+
+<p>Much like the "Whiskey Rebellion" site I reviewed, primary sources utilized in the Biography, Timeline, Map, and People sections would be organized for direct viewing in the Artefacts sections. Additionally, each page will contain a search form to allow the user to quickly access information to match their requirements.</p>
