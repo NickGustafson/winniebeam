@@ -156,7 +156,9 @@
 				for(var p in pages)
 				{
 					page = document.querySelector("[id='" + p + "'] p");
-					page.innerHTML = page.innerText;
+
+					//remove previous highlights
+					page.innerHTML = page.innerHTML.replace(/<[\/]{0,1}(mark)[^><]*>/g, ""); 
 					
 					if(pages[p].toLowerCase().indexOf(param.toLowerCase()) != -1)
 					{
@@ -168,6 +170,7 @@
 						li.appendChild(a);
 						list.appendChild(li);
 						
+						//add highlights
 						page.innerHTML = page.innerHTML.replace(re, "<mark>" + param + "</mark>");
 					}
 				}
@@ -213,7 +216,7 @@
 			#output a:before { content:url('images/Icon_External_Link.png'); }
 
 			label { font-weight:bold;display:inline-block;margin-right:5px; }	
-			input[type=search] { font-size:1.5em;width:80%;border-radius:5px; }
+			input[type=search] { font-size:1.5em;width:75%;border-radius:5px; }
 			button { border-radius:5px;font-size:1.5em; }
 		</style>
 	</head>
