@@ -5,7 +5,61 @@
 		<title>Diary Pages</title>
 		<script>
 			var pages = null;
-			var mos = [ "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december" ];
+			var pageNum = 7;
+
+			var folders = 
+			{
+				"f01_january-february-1-1900" : { start : "1900-01-01", end : "1900-02-01" },
+				"f02_february-march-1-1900" : { start : "1900-02-01", end : "1900-03-01" },
+				"f03_march-1900" : { start : "1900-03-01", end : "1900-03-31" },
+				"f04_april-1900" : { start : "1900-04-01", end : "1900-04-30" },
+				"f05_may-june-1-1900" : { start : "1900-05-01", end : "1900-06-01" },
+				"f06_june-july-1-1900" : { start : "1900-06-01", end : "1900-07-01" },
+				"f07_july-1900" : { start : "1900-07-01", end : "1900-07-31" },
+				"f08_august-september-1-1900" : { start : "1900-08-01", end : "1900-09-01" },
+				"f09_september-october-1-1900" : { start : "1900-09-01", end : "1900-10-01" },
+				"f10_october-1900" : { start : "1900-10-01", end : "1900-10-31" },
+				"f11_november-1900" : { start : "1900-11-01", end : "1900-11-30" },
+				"f12_december-january-1-1901" : { start : "1900-12-01", end : "1901-01-01" },
+				"f13_january-1901" : { start : "1901-01-01", end : "1901-01-13" }
+			};
+
+			var miscPages = 
+			{
+				"f13_january-1901/pg_0196.pdf" : { start : "1901-01-14", end : "1901-01-17" },
+				"f13_january-1901/pg_0197.pdf" : { start : "1901-01-18", end : "1901-01-20" },
+				"f13_january-1901/pg_0198.pdf" : { start : "1901-01-21", end : "1901-01-23" },
+				"f13_january-1901/pg_0199.pdf" : { start : "1901-01-24", end : "1901-01-26" },
+				"f01_january-february-1-1900/pg_0006.pdf" : { start : "1901-01-27", end : "1901-01-28" },
+				"f01_january-february-1-1900/pg_0005.pdf" : { start : "1901-01-29", end : "1901-01-30" }, 
+			}
+
+			function getPDF(dt)
+			{
+				var url = "https://github.com/BrockDSL/winnie_beam_1900_dairy/blob/master";
+				if(dt < "1901-01-14")
+				{
+					for(var f in folders)
+					{
+						if(folders[f].start <= dt && dt <= folders[f].end)
+						{
+							return url + "/" + f + "/pg_" + ("0000" + pageNum).slice(-4) + ".pdf";
+						}
+					}
+				}
+				else
+				{
+					for(var f in miscPages)
+					{
+						if(miscPages[f].start <= dt && dt <= miscPages[f].end)
+						{
+							return url + "/" + f;
+						}
+					}
+				}
+			}
+
+			function padZero(num) { return ("000" + num).slice(-4); }
 
 			function jumpToDate(str)
 			{
@@ -53,23 +107,34 @@
 						alert("That is not a valid file.  Please try again.");
 						return;
 					}
+
+					var counter = 0;
 					if(this.status == 200 && this.responseText != null) 
 					{				
 						pages = JSON.parse(this.responseText);
-						var d, para, h2;
+						var d, para, h2, a;
 						for(var p in pages)
 						{
 							h2 = document.createElement("h2");
 							h2.innerHTML = (new Date(p + "T00:00")).DateFormat("mmm d, yyyy");
 
+							a = document.createElement("a");
+							a.target = "_blank";
+							a.href = getPDF(p);
+							a.innerHTML = "View PDF";
+
 							para = document.createElement("p");
-							para.innerHTML = pages[p]; 
+							para.appendChild(document.createTextNode(pages[p]));
 
 							d = document.createElement("div");
 							d.id = p;
 							d.appendChild(h2);
 							d.appendChild(para);
+							d.appendChild(a);
 							document.querySelector("#output div").appendChild(d);
+
+							if(counter % 2 == 1) pageNum++;
+							counter++;
 						}
 					}
 				};
@@ -77,8 +142,10 @@
 				xhttp.send();	
 			};
 
-			function doSearch(param)
+			function doSearch()
 			{
+				var param = document.forms[0].param.value;
+
 				var esc = param.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 				var re = new RegExp(esc, "gi");
 
@@ -105,6 +172,8 @@
 					}
 				}
 				list.previousElementSibling.innerHTML = list.childNodes.length + " results for \"" + param + "\".";
+
+				return false;
 			}
 		</script>
 		<link href="https://fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet" />
@@ -138,14 +207,22 @@
 			#sidebar span { display:block;font-weight:bold;font-size:14pt;margin:10px 0; }
 			
 			#output { margin-left:17%;width:60%; }
-			#output h2 { font-size:22pt;margin:5px 0;padding:5px 0;border-top:solid 2px red;border-bottom:solid 2px red; }
+			#output h2 { font-size:22pt;margin:5px 0 10px 0;padding:5px 0;border-top:solid 2px red;border-bottom:solid 2px red; }
+			#output p { margin-bottom:5px; }
+			#output a { font-size:13pt;font-family:Arial; }
+			#output a:before { content:url('images/Icon_External_Link.png'); }
 
-			label { font-weight:bold;display:inline-block;margin-right:5px; }
+			label { font-weight:bold;display:inline-block;margin-right:5px; }	
+			input[type=search] { font-size:1.5em;width:80%;border-radius:5px; }
+			button { border-radius:5px;font-size:1.5em; }
 		</style>
 	</head>
 	<body>
 		<nav id="sidebar">
-			<label>Search</label><input type="search" /><button type="button" onclick="doSearch(this.previousSibling.value)">Go</button>
+			<form onsubmit="return doSearch()">
+				<input name="param" type="search" placeholder="Search Diary" />
+				<button type="submit">&#128269;</button>
+			</form>
 			<span></span>
 			<ol></ol>
 		</nav>
