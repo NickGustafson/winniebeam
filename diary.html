@@ -59,8 +59,6 @@
 				}
 			}
 
-			function padZero(num) { return ("000" + num).slice(-4); }
-
 			function jumpToDate(str)
 			{
 				document.location.href = "#" + str;
@@ -71,18 +69,18 @@
 				var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 				var yyyy = this.getFullYear();
 				var yy = yyyy.toString().substring(2);
-				var m = this.getMonth();
-				var mm = m < 10 ? "0" + m : m;
-				var mmm = months[m];
+				var m = this.getMonth() + 1;
+				var mm = ("0" + m).slice(-2);
+				var mmm = months[m - 1];
 				var d = this.getDate();
-				var dd = d < 10 ? "0" + d : d;
+				var dd = ("0" + d).slice(-2);
 				
 				var h = this.getHours();
-				var hh = h < 10 ? "0" + h : h;
+				var hh = ("0" + h).slice(-2);
 				var n = this.getMinutes();
-				var nn = n < 10 ? "0" + n : n;
+				var nn = ("0" + n).slice(-2);
 				var s = this.getSeconds();
-				var ss = s < 10 ? "0" + s : s;
+				var ss = ("0" + s).slice(-2);
 
 				formatString = formatString.replace(/yyyy/, yyyy);
 				formatString = formatString.replace(/yy/, yy);
@@ -119,12 +117,15 @@
 							h2.innerHTML = (new Date(p + "T00:00")).DateFormat("mmm d, yyyy");
 
 							a = document.createElement("a");
+							a.className = "pdf";
 							a.target = "_blank";
 							a.href = getPDF(p);
+							a.title = a.href.toString().slice(-11);
 							a.innerHTML = "View PDF";
 
 							para = document.createElement("p");
-							para.appendChild(document.createTextNode(pages[p]));
+							//para.appendChild(document.createTextNode(pages[p]));
+							para.innerHTML = pages[p];
 
 							d = document.createElement("div");
 							d.id = p;
@@ -152,13 +153,14 @@
 				var list = document.querySelector("#sidebar ol");
 				list.innerHTML = "";
 
-				var li, a, page;
+				var li, a, page, mk;
 				for(var p in pages)
 				{
 					page = document.querySelector("[id='" + p + "'] p");
 
 					//remove previous highlights
-					page.innerHTML = page.innerHTML.replace(/<[\/]{0,1}(mark)[^><]*>/g, ""); 
+					mk = page.querySelectorAll("mark");
+					for(var i = 0; i < mk.length; i++) page.replaceChild(document.createTextNode(mk[i].innerText), mk[i]);
 					
 					if(pages[p].toLowerCase().indexOf(param.toLowerCase()) != -1)
 					{
@@ -174,7 +176,7 @@
 						page.innerHTML = page.innerHTML.replace(re, "<mark>" + param + "</mark>");
 					}
 				}
-				list.previousElementSibling.innerHTML = list.childNodes.length + " results for \"" + param + "\".";
+				list.previousElementSibling.innerHTML = list.childNodes.length + " result(s) for \"" + param + "\".";
 
 				return false;
 			}
@@ -212,8 +214,8 @@
 			#output { margin-left:17%;width:60%; }
 			#output h2 { font-size:22pt;margin:5px 0 10px 0;padding:5px 0;border-top:solid 2px red;border-bottom:solid 2px red; }
 			#output p { margin-bottom:5px; }
-			#output a { font-size:13pt;font-family:Arial; }
-			#output a:before { content:url('images/Icon_External_Link.png'); }
+			#output .pdf { font-size:13pt;font-family:Arial; }
+			#output .pdf:before { content:url('images/Icon_External_Link.png'); }
 
 			label { font-weight:bold;display:inline-block;margin-right:5px; }	
 			input[type=search] { font-size:1.5em;width:75%;border-radius:5px; }
